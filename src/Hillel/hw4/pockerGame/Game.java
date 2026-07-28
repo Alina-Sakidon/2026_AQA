@@ -1,5 +1,7 @@
 package Hillel.hw4.pockerGame;
 
+import Hillel.hw8.EmptyDeckException;
+
 import java.util.Random;
 
 public class Game {
@@ -14,6 +16,9 @@ public class Game {
 
     public Card[] createDeck() {
         deck = new Card[noOfCards];
+        if (noOfCards <= 0) {
+            throw new EmptyDeckException("no of cards should be more than 0");
+        }
         System.out.println("Create deck: ");
         int count = 0;
         for (String suit : suits) {
@@ -43,6 +48,9 @@ public class Game {
         for (int round = 1; round <= 5; round++) {
             System.out.printf("\nRound %s: ", round);
             for (int player = 1; player <= noOfPlayers; player++) {
+                if (noOfPlayers < 2) {
+                    throw new IllegalArgumentException("Numbers of users should be greater than 1");
+                }
                 Card card = deck[count];
                 System.out.println(String.format("Player %s receive card %s", player, card));
                 count++;
