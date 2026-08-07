@@ -147,6 +147,37 @@ public class FileNavigator {
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().stream().mapToLong(FileData::getFileSize).max().orElseThrow()));
     }
 
+    // Згрупувати файли за шляхом, але залишити тільки шлях та назви файлів.
+
+    public Map<Path, List<String>> getFileNamesByPath(Path path) {
+        return Optional.ofNullable(filesByPath.get(path))
+                .map(list -> Map.of(path, list.stream().map(FileData::getFileName).toList())).orElse(Map.of());
+    }
+
+    //******************
+    //GROUPING
+    //******************
+// create for collections practice ******
+    private List<FileData> filesData = new ArrayList<>();
+
+    public Map<Path, List<FileData>> groupingFilesByPath() {
+        return filesData.stream().collect(Collectors.groupingBy(FileData::getFilePath));
+    }
+
+    // Порахувати, скільки файлів кожного розміру існує.
+
+    public Map<Long, Long> countFilesBySize() {
+        return filesData.stream().collect(Collectors.groupingBy(FileData::getFileSize, Collectors.counting()));
+    }
+
+    //  Повернути всі файли, згруповані за розміром.
+
+    public Map<Long, List<FileData>> groupFilesBySize() {
+        return   //filesData.stream().collect(Collectors.groupingBy(FileData::getFileSize));
+                filesByPath.values().stream().flatMap(List::stream).collect(Collectors.groupingBy(FileData::getFileSize));
+    }
+
+
     @Override
     public String toString() {
         return "FileNavigator{" +
@@ -154,3 +185,4 @@ public class FileNavigator {
                 '}';
     }
 }
+
