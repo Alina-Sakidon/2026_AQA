@@ -1,5 +1,13 @@
 ### IntelliJ IDEA ###
 out/
+target/
+*.iml
+
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/repositories.xml
+.idea/workspace.xml
 !**/src/main/**/out/
 !**/src/test/**/out/
 
