@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
 public class LoginTests extends BaseTest {
@@ -59,8 +58,6 @@ public class LoginTests extends BaseTest {
     }
 
     private String getLoginMessageText() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
-
         WebElement message = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("flash"))
         );

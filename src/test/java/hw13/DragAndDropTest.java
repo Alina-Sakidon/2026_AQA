@@ -20,7 +20,7 @@ public class DragAndDropTest extends BaseTest {
         WebElement source = driver.findElement(By.id("draggable"));
         WebElement target = driver.findElement(By.id("droppable"));
 
-        new Actions(driver).dragAndDrop(source, target).perform();
+        actions.dragAndDrop(source, target).perform();
 
         String messageToCheck = driver.findElement(By.id("droppable")).getText();
 
