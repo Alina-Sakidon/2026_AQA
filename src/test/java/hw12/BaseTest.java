@@ -1,5 +1,6 @@
 package hw12;
 
+import hw15.MainPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,19 +13,20 @@ import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
-    protected WebDriverWait wait;
-    protected Actions actions;
+
 
     @BeforeClass
     public void driverSetup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        actions = new Actions(driver);
     }
 
     @AfterClass
     public void closeDriver() {
         driver.quit();
+    }
+    public MainPage openApp(){
+        driver.get("https://the-internet.herokuapp.com/");
+        return new MainPage(driver);
     }
 }
